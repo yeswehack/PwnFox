@@ -4,6 +4,18 @@ PwnFox is a Firefox/Burp extension that provide usefull tools for your security 
 
 ![popup](/screenshots/popup.png)
 
+* [Features](#features)
+  * [Single click BurpProxy](#single-click-burpproxy)
+  * [Containers Profiles](#containers-profiles)
+  * [PostMessage Logger](#postmessage-logger)
+  * [Toolbox](#toolbox)
+  * [Security header remover](#security-header-remover)
+* [Build](#build)
+  * [All](#all)
+  * [Firefox](#firefox)
+  * [Burp](#burp)
+* [Changelog](#changelog)
+
 
 ## Features
 ### Single click BurpProxy
@@ -39,7 +51,7 @@ You can return a string or a JSON serializable object.
 ![](/screenshots/post-dual.png)
 
 
-### Toolbox(s)
+### Toolbox
 
 Inject you own javascript code on page load. The code will be loaded as soon as possible. This can used to add dangerous behavior detection, or just to add extra function to your js console.
 
