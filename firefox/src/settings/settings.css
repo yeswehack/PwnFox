@@ -1,0 +1,71 @@
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #202023;
+        color: white;
+    }
+}
+
+body {
+    display: flex;
+    font-family: Helvetica, sans-serif;
+    flex-direction: column;
+    justify-items: stretch;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 1.2em;
+    min-height: 100vh;
+}
+
+hr {
+    width: 90%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0px;
+}
+
+ul ul {
+    padding-left: 20px;
+}
+
+li.option-entry {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5px 0;
+}
+
+label {
+    font-size: 1.2em;
+    color: var(--in-content-primary-button-background);
+}
+
+input {
+    margin-left: 5px;
+    padding: 2px;
+}
+
+label::after {
+    content: ":";
+}
+
+button#save {
+    align-self: flex-end;
+}
+
+form {
+    display: contents;
+}
+
+textarea {
+    min-height: 300px;
+}

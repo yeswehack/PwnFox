@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-dark">
+
+<head>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="./panel.css">
+    <script src="/src/config.js"></script>
+    <script src="/src/fileSelection.js"></script>
+    <script src="./panel.js"></script>
+    <link rel="stylesheet" href="/src/fileSelection.css">
+</head>
+
+<body>
+    <main>
+        <div id="message-toolbar">
+            <button id="btn-clear">Clear</button>
+            <button id="btn-shrink">Shrink all</button>
+            <button id="btn-expand">Expand all</button>
+            <div class="spacer"></div>
+                      <svg id="toggleDual" height="20px" viewBox="0 0 16 16" color="inherit" xmlns="http://www.w3.org/2000/svg"
+                fill="context-fill #b1b1b3">
+                <path d="
+    M0 4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3h-10a3 3 0 0 1-3-3z
+    M2 4v8a1 1 0 0 0 1 1h7v-10h-7a1 1 0 0 0-1 1z
+    M11 3v10h2a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1z" />
+            </svg> 
+        </div>
+        <div id="message-table">
+            <div class="row">
+                <span>Id</span>
+                <span>Origin</span>
+                <span>Destination</span>
+                <span>Message</span>
+                <span>Time</span>
+            </div>
+            <div id="message-list">
+
+            </div>
+        </div>
+        <div id="message-filter">
+            <h2>Filter function</h2>
+            <div id="savedMessageFunc" class="file-list">
+                <div class="file-list-head">
+                    <select>
+                    </select>
+                    <input type="file" accept="application/javscript">
+                    <button class="file-list-new" title="New">
+    
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="context-fill"
+                                d="M14 7H9V2a1 1 0 0 0-2 0v5H2a1 1 0 1 0 0 2h5v5a1 1 0 0 0 2 0V9h5a1 1 0 0 0 0-2z"></path>
+                        </svg>
+                    </button>
+                    </button>
+                    <button class="file-list-edit" title="Rename">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="context-fill"
+                                d="M14.354 2.353l-.708-.707a2.007 2.007 0 0 0-2.828 0l-.379.379a.5.5 0 0 0 0 .707l2.829 2.829a.5.5 0 0 0 .707 0l.379-.379a2.008 2.008 0 0 0 0-2.829zM9.732 3.439a.5.5 0 0 0-.707 0L3.246 9.218a1.986 1.986 0 0 0-.452.712l-1.756 4.39A.5.5 0 0 0 1.5 15a.5.5 0 0 0 .188-.037l4.382-1.752a1.966 1.966 0 0 0 .716-.454l5.779-5.778a.5.5 0 0 0 0-.707zM5.161 12.5l-2.549 1.02a.1.1 0 0 1-.13-.13L3.5 10.831a.1.1 0 0 1 .16-.031l1.54 1.535a.1.1 0 0 1-.039.165z">
+                            </path>
+                        </svg>
+                    </button>
+                    <button class="file-list-save" title="Save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path fill="context-fill"
+                                d="M14 3h-2v2h2v8H2V5h7V3h-.849L6.584 1.538A2 2 0 0 0 5.219 1H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM2 3h3.219l1.072 1H2z">
+                            </path>
+                            <path fill="red"
+                                d="M8.146 6.146a.5.5 0 0 0 0 .707l2 2a.5.5 0 0 0 .707 0l2-2a.5.5 0 1 0-.707-.707L11 7.293V.5a.5.5 0 0 0-1 0v6.793L8.854 6.146a.5.5 0 0 0-.708 0z">
+                            </path>
+                        </svg>
+                        <button class="file-list-delete" title="Delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <path fill="context-fill"
+                                    d="M6.5 12a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 0 .5.5zm2 0a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 0 .5.5zm2 0a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 0 .5.5z">
+                                </path>
+                                <path fill="context-fill"
+                                    d="M14 2h-3.05a2.5 2.5 0 0 0-4.9 0H3a1 1 0 0 0 0 2v9a3 3 0 0 0 3 3h5a3 3 0 0 0 3-3V4a1 1 0 0 0 0-2zM8.5 1a1.489 1.489 0 0 1 1.391 1H7.109A1.489 1.489 0 0 1 8.5 1zM12 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4h7z">
+                                </path>
+                            </svg>
+                        </button>
+                </div>
+                <div class="file-list-body">
+                    <textarea disabled spellcheck="false" autocomplete="false"></textarea>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+
+</html>

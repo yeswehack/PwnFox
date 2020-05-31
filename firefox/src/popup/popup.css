@@ -1,0 +1,189 @@
+@import '/src/popup/colors.css';
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: var(--grey-80);
+        --color: var(--grey-20);
+        --color-disabled: var(--grey-40);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --background-color: var(--grey-20);
+        --color: var(--grey-90);
+        --color-disabled: var(--grey-70);
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+main.diasabled {
+    color: var(--color-disabled);
+}
+
+body {
+    padding: 5px 10px 10px 10px;
+    background-color: var(--background-color);
+    color: var(--color);
+    width: 300px;
+    overflow: hidden;
+}
+
+.option-entry {
+    display: grid;
+    grid-template-columns: auto 50px;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 48px auto auto 5px;
+    grid-column-gap: 10px;
+    align-items: center;
+}
+
+header img {
+    width: 48px;
+    margin: 0 10px;
+}
+
+header .right{
+    display: flex;
+    flex-direction: column;
+    justify-items: end;
+}
+
+hr {
+    width: 80%;
+    margin:10px  auto ;
+    border-bottom: 1px solid var(--color);
+}
+
+header #enable{
+    margin-bottom: 2px;
+}
+
+header #enable div {
+    justify-self: right;
+    text-align: right;
+    display: flex;
+}
+
+header h1 {
+    margin: 10px;
+    font-weight: lighter;
+}
+
+
+h2, h1 {
+    font-weight: lighter;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    display:  flex;
+    flex-direction: column;
+}
+
+
+h2  input , h1  input {
+    position: absolute;
+    float:right;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0px;
+    height: 1.8em;
+    margin-right: 40px;
+}
+
+
+h2:not(:first-child){
+    margin-top: 10px;
+}
+
+#identities {
+    display: flex;
+    justify-content: space-between;
+}
+
+.identity {
+    display: block;
+    --size: 25px;
+    margin: 5px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 7px;
+    cursor: pointer;
+    transition: .15s background-color, .1s transform;
+}
+
+.identity:active{
+    transform: scale(.9);
+
+}
+
+.identity.blue {
+    background: var(--blue-50);
+}
+
+.identity.blue:hover {
+    background: var(--blue-70);
+}
+
+.identity.turquoise {
+    background: var(--teal-50);
+}
+
+.identity.turquoise:hover {
+    background: var(--teal-70);
+}
+
+.identity.green {
+    background: var(--green-50);
+}
+
+.identity.green:hover {
+    background: var(--green-70);
+}
+
+.identity.yellow {
+    background: var(--yellow-50);
+}
+
+.identity.yellow:hover {
+    background: var(--yellow-70);
+}
+
+.identity.orange {
+    background: var(--orange-50);
+}
+
+.identity.orange:hover {
+    background: var(--orange-70);
+}
+
+.identity.red {
+    background: var(--red-50);
+}
+
+.identity.red:hover {
+    background: var(--red-70);
+}
+
+.identity.pink {
+    background: var(--magenta-50);
+}
+
+.identity.pink:hover {
+    background: var(--magenta-70);
+}
+
+.identity.purple {
+    background: var(--purple-50);
+}
+
+.identity:hover.purple {
+    background: var(--purple-70);
+}

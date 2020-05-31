@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <clipPath id="clip-fox">
+            <path id="ld" d="
+             M20 40
+             L20 0 L45 25 
+             L83 25 
+             L108 0 L108 40 
+             L128 40 L113 55 L128 55
+             L64 118 
+             L0 55 L15 55 L0 40 
+             Z"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#clip-fox)">
+        <use xlink:href="#ld" stroke="black" stroke-width="10" fill="#f63"/>
+        <ellipse cx="48" cy="62" rx="8" ry="7"/>
+        <ellipse cx="80" cy="62" rx="8" ry="7"/>
+        <circle cx="64" cy="110" r="12"/>
+    </g>
+</svg>

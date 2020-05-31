@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <header>
+        <div id="icon"><img src="../../icons/icon.svg" width="48" height="48"></div>
+        <h1>PwnFox</h1>
+        <div class="right">
+            <label class="option-entry">
+                Enabled <input id="option-enabled" type="checkbox">
+            </label>
+            <a id="settings" href="#">Settings</a>
+        </div>
+        <div>&nbsp;</div>
+    </header>
+    <main>
+        <h2>Options</h2>
+        <hr>
+        <label class="option-entry">
+            Use burp proxy <input id="option-useBurpProxy" type="checkbox">
+        </label>
+        <label class="option-entry">
+            Add container header <input id="option-addContainerHeader" type="checkbox">
+        </label>
+        <label class="option-entry">
+            Remove security headers <input id="option-removeSecurityHeaders" type="checkbox">
+        </label>
+        <h2>
+            Toolbox
+            <input id="option-injectToolbox" type='checkbox' title="inject">
+        </h2>
+        <hr>
+        <select class="col-123" id="select-toolbox"></select>
+        <h2>New container tab</h2>
+        <hr>
+        <div id="identities">
+        </div>
+    </main>
+    <script src="/src/icon.js"></script>
+    <script src="/src/config.js"></script>
+    <script src="/src/popup/popup.js"></script>
+</body>
+
+</html>

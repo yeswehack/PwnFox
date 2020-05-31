@@ -1,0 +1,59 @@
+.file-list {
+    display: flex;
+    flex-direction: column;
+    justify-items: stretch;
+    width: 100%;
+}
+
+.file-list-head {
+    display: grid;
+    grid-template-columns: 1fr repeat(4, auto);
+}
+
+.file-list-head input[type="file"] {
+    display: none;
+}
+
+.file-list-head button {
+    background: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    width: 50px;
+}
+
+.file-list-head button:hover {
+    filter: invert(50%);
+}
+
+.file-list-head select {
+    background: inherit;
+    line-height: 1.2em;
+    padding: 5px;
+    color: inherit;
+}
+
+.file-list svg path {
+    fill: currentColor;
+}
+
+.file-list-body {
+    display: flex;
+    justify-items: stretch;
+    height: 100%;
+}
+
+.file-list-body textarea {
+    flex-grow: 1;
+    margin: 0;
+    height: 100%;
+    padding: 10px;
+    -webkit-appearance: none;
+    
+}
+
+
+.file-list-body textarea.changed {
+    box-shadow: 0 0 13px 0px blue inset;
+}

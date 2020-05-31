@@ -1,0 +1,62 @@
+{
+  "description": "Pwnfox",
+  "manifest_version": 2,
+  "name": "PwnFox",
+  "version": "1.1.0",
+  "icons": {
+    "48": "icons/icon.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "PwnFox@bi.tk"
+    }
+  },  
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest",
+    "contextualIdentities",
+    "cookies",
+    "proxy",
+    "theme",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs"
+  ],
+  "options_ui": {
+    "page": "src/settings/index.html",
+    "browser_style": true
+  },
+  "browser_action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon.svg"
+    },
+    "default_title": "PwnFox",
+    "browser_style": true
+  },
+  "background": {
+    "scripts": [
+      "src/icon.js",
+      "src/config.js",
+      "src/features.js",
+      "src/background.js"
+    ]
+  },
+  "devtools_page": "src/devtools/index.html",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/config.js",
+        "src/features.js",
+        "src/contentScript.js"
+      ]
+    }
+  ]
+}
