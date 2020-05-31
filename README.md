@@ -6,7 +6,9 @@ PwnFox is a Firefox/Burp extension that provide usefull tools for your security 
 
 
 ## Features
+### Single click BurpProxy
 
+Connect to Burp with a simple click, this will probably remove the need for other addons like foxyProxy. However if you need the extra features provided by foxyProxy you can leave this unchecked. 
 
 ###  Containers Profiles
 
@@ -57,6 +59,30 @@ Headers stripped:
 * X-Frame-Options
 * X-Content-Type-Options
 
+
+## Build
+
+### All
+run `./build.sh`
+
+### Firefox
+
+```shell
+cd firefox
+web-ext build
+# the zip file is available in /firefox/web-ext-artifacts/pwnfox-${version}.zip
+# Optional. If you want to sign you own build
+web-ext sign --api-key="$KEY" --api-secret="$SECRET"
+# the xpi file is available in /firefox/web-ext-artifacts/pwnfox-${version}.xpi
+
+```
+### Burp
+
+```shell
+cd burp
+gradle build
+# the jar file is available in /burp/build/libs/PwnFox.jar
+```
 
 ## Changelog
 
