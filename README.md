@@ -2,17 +2,19 @@
 
 PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
-* [Features](#features)
-  * [Single click BurpProxy](#single-click-burpproxy)
-  * [Containers Profiles](#containers-profiles)
-  * [PostMessage Logger](#postmessage-logger)
-  * [Toolbox](#toolbox)
-  * [Security header remover](#security-header-remover)
-* [Build](#build)
-  * [All](#all)
-  * [Firefox](#firefox)
-  * [Burp](#burp)
-* [Changelog](#changelog)
+- [<img src="/firefox/icons/icon.svg" width=30> PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
+  - [Features](#features)
+    - [Single click BurpProxy](#single-click-burpproxy)
+    - [Containers Profiles](#containers-profiles)
+    - [PostMessage Logger](#postmessage-logger)
+    - [Toolbox](#toolbox)
+    - [Security header remover](#security-header-remover)
+  - [Installation](#installation)
+  - [Build](#build)
+    - [All](#all)
+    - [Firefox](#firefox)
+    - [Burp](#burp)
+  - [Changelog](#changelog)
 
 
 ## Features
@@ -72,11 +74,21 @@ Headers stripped:
 * X-Frame-Options
 * X-Content-Type-Options
 
+## Installation
+
+You can find the latest build here:
+* [https://github.com/B-i-t-K/PwnFox/releases]()
+
+In firefox visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
+In Burp go to extender and add `PwnFox-Burp.jar` as a java extension.
 
 ## Build
 
 ### All
-run `./build.sh`
+```shell
+./build.sh
+# Pwnfox-firefox.zip and PwnFox-burp.jar are available in /bin
+```
 
 ### Firefox
 
@@ -99,5 +111,5 @@ gradle build
 
 ## Changelog
 
-* v1.1.0
+* v1.0.2
   * First public release
