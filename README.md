@@ -1,5 +1,5 @@
 
-![icon](/firefox/icons/icon.svg =50x50)
+![icon](/firefox/icons/icon.svg)<!-- .element height="50px" width="50px" -->
 # PwnFox
 
 PwnFox is a Firefox/Burp extension that provide usefull 
