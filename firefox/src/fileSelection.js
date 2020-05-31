@@ -111,7 +111,6 @@ function newFileSelection(config, storeName, selector, defaultName) {
     textarea.addEventListener("keydown", ev => {
 
         /* ctrl+s -> save */
-        console.log(ev)
         if (ev.ctrlKey && ev.key === "s") {
             ev.preventDefault()
             const filename = select.value
