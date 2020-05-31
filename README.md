@@ -1,11 +1,12 @@
 
-![icon](/firefox/icons/icon.svg)
+![icon](/firefox/icons/icon.svg =50x50)
 # PwnFox
 
 PwnFox is a Firefox/Burp extension that provide usefull 
 
 
 ![popup](/screenshots/popup.png)
+
 
 ## Features
 
@@ -14,6 +15,8 @@ PwnFox is a Firefox/Burp extension that provide usefull
 
 PwnFox give you fast access to the Firefox containers. This allow you to have multiple identities in the same browser. 
 When PwnFox and the `Add container header` option are enabled, PwnFox will automatically add a `X-PwnFox-Color` header to hightlight the query in Burp.
+
+PwnFoxBurp will automatically highlight and strip the header, but you can also specify your own behavior with addons like logger++.
 
 ![tabs](/screenshots/tabs.png)
 ![burp](/screenshots/burp.png)
@@ -39,10 +42,26 @@ You can return a string or a JSON serializable object.
 
 ### Toolbox(s)
 
-Inject you own javascript code on page load. The code will be loaded as soon as possible. This can used to add dangerous behavior detection, or just to add extra function to you js console.
+Inject you own javascript code on page load. The code will be loaded as soon as possible. This can used to add dangerous behavior detection, or just to add extra function to your js console.
 
 **Be carefull, the injected toolbox will run in the window context. Do not inject secret in untrusted domain.**
 
 
 ![settings](/screenshots/settings.png)
 
+
+### Security header remover
+
+Sometime it's easier to work with security header disabled. You can now do it with a single button press. Don't forget to reenable them before testing your final payload.
+
+Headers stripped:
+* Content-Security-Policy
+* X-XSS-Protection
+* X-Frame-Options
+* X-Content-Type-Options
+
+
+## Changelog
+
+* v1.1.0
+  * First public release
