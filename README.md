@@ -2,8 +2,6 @@
 
 PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
-![popup](/screenshots/popup.png)
-
 * [Features](#features)
   * [Single click BurpProxy](#single-click-burpproxy)
   * [Containers Profiles](#containers-profiles)
@@ -18,6 +16,9 @@ PwnFox is a Firefox/Burp extension that provide usefull tools for your security 
 
 
 ## Features
+
+![popup](/screenshots/popup.png)
+
 ### Single click BurpProxy
 
 Connect to Burp with a simple click, this will probably remove the need for other addons like foxyProxy. However if you need the extra features provided by foxyProxy you can leave this unchecked. 
