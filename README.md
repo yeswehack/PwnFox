@@ -1,7 +1,6 @@
 # <img src="/firefox/icons/icon.svg" width=30> PwnFox
 
-PwnFox is a Firefox/Burp extension that provide usefull 
-
+PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
 ![popup](/screenshots/popup.png)
 
