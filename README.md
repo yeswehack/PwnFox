@@ -76,6 +76,8 @@ Headers stripped:
 
 ## Installation
 
+[https://addons.mozilla.org/en-US/firefox/addon/pwnfox/]() (soon)
+
 You can find the latest build here:
 * [https://github.com/B-i-t-K/PwnFox/releases]()
 
