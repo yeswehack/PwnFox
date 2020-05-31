@@ -2,7 +2,7 @@
 
 PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
-- [<img src="/firefox/icons/icon.svg" width=30> PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
+- [PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
   - [Features](#features)
     - [Single click BurpProxy](#single-click-burpproxy)
     - [Containers Profiles](#containers-profiles)
