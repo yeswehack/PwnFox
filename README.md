@@ -76,13 +76,17 @@ Headers stripped:
 
 ## Installation
 
-[https://addons.mozilla.org/en-US/firefox/addon/pwnfox/](https://addons.mozilla.org/en-US/firefox/addon/pwnfox/) (soon)
 
 You can find the latest build here:
 * [https://github.com/B-i-t-K/PwnFox/releases](https://github.com/B-i-t-K/PwnFox/releases)
 
-In firefox visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
-In Burp go to extender and add `PwnFox-Burp.jar` as a java extension.
+### Firefox
+ - visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
+ - or install from 
+[https://addons.mozilla.org/en-US/firefox/addon/pwnfox/](https://addons.mozilla.org/en-US/firefox/addon/pwnfox/)
+
+### Burp
+- Go to extender and add `PwnFox-Burp.jar` as a java extension.
 
 ## Build
 
