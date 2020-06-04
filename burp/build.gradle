@@ -6,7 +6,6 @@ buildscript {
 
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -16,13 +15,11 @@ buildscript {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
-
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'net.portswigger.burp.extender:burp-extender-api:2.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'net.portswigger.burp.extender:burp-extender-api:2.1'
 }
 
 jar {
