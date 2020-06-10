@@ -2,7 +2,7 @@
 
 PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
-If are a chrome user you can check https://github.com/nccgroup/autochrome. 
+If you are a chrome user you can check https://github.com/nccgroup/autochrome. 
 
 - [PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
   - [Features](#features)
