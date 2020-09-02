@@ -63,8 +63,10 @@ Inject you own javascript code on page load. The code will be loaded as soon as 
 
 #### Examples
 
-> Catching .git/ exposed on the visited websites [checkGit.js](./toolbox_examples/checkGit.js)
-> More to come
+| **Name/Link**                                 | **Description**                                |
+| :-------------------------------------------- | :--------------------------------------------- |
+| [checkGit.js](./toolbox_examples/checkGit.js) | Catching .git/ exposed on the visited websites |
+| TODO                                          | TODO                                           |
 
 ### Security header remover
 
