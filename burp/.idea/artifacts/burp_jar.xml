@@ -1,12 +1,12 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="PwnFox:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/PwnFox_jar</output-path>
+  <artifact type="jar" build-on-make="true" name="burp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/burp_jar</output-path>
     <root id="archive" name="PwnFox.jar">
-      <element id="module-output" name="PwnFox" />
+      <element id="module-output" name="burp" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/portswigger/burp/extender/burp-extender-api/2.1/burp-extender-api-2.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-stdlib.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-test.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/portswigger/burp/extender/burp-extender-api/2.1/burp-extender-api-2.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
