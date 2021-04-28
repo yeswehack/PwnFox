@@ -2,7 +2,9 @@
 
 PwnFox is a Firefox/Burp extension that provide usefull tools for your security audit.
 
-- [<img src="/firefox/icons/icon.svg" width=30> PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
+If you are a chrome user you can check https://github.com/nccgroup/autochrome. 
+
+- [PwnFox](#img-srcfirefoxiconsiconsvg-width30-pwnfox)
   - [Features](#features)
     - [Single click BurpProxy](#single-click-burpproxy)
     - [Containers Profiles](#containers-profiles)
@@ -63,6 +65,8 @@ Inject you own javascript code on page load. The code will be loaded as soon as 
 
 ![settings](/screenshots/settings.png)
 
+I will publish some of my toolbox soon (ENOTIME)
+
 
 ### Security header remover
 
@@ -76,11 +80,17 @@ Headers stripped:
 
 ## Installation
 
-You can find the latest build here:
-* [https://github.com/B-i-t-K/PwnFox/releases]()
 
-In firefox visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
-In Burp go to extender and add `PwnFox-Burp.jar` as a java extension.
+You can find the latest build here:
+* [https://github.com/B-i-t-K/PwnFox/releases](https://github.com/B-i-t-K/PwnFox/releases)
+
+### Firefox
+ - visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
+ - or install from 
+[https://addons.mozilla.org/en-US/firefox/addon/pwnfox/](https://addons.mozilla.org/en-US/firefox/addon/pwnfox/)
+
+### Burp
+- Go to extender and add `PwnFox-Burp.jar` as a java extension.
 
 ## Build
 
