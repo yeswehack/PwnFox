@@ -4,10 +4,10 @@ import java.io.PrintWriter
 
 class BurpExtender : IBurpExtender, IHttpListener, IExtensionStateListener {
 
-    lateinit var callbacks: IBurpExtenderCallbacks
-    lateinit var helpers: IExtensionHelpers
-    lateinit var stdout: PrintWriter
-    lateinit var stderr: PrintWriter
+    private lateinit var callbacks: IBurpExtenderCallbacks
+    private lateinit var helpers: IExtensionHelpers
+    private lateinit var stdout: PrintWriter
+    private lateinit var stderr: PrintWriter
 
     override fun registerExtenderCallbacks(callbacks: IBurpExtenderCallbacks) {
         this.callbacks = callbacks
@@ -27,11 +27,11 @@ class BurpExtender : IBurpExtender, IHttpListener, IExtensionStateListener {
         val requestInfo = helpers.analyzeRequest(messageInfo)
         val body = messageInfo.request.drop(requestInfo.bodyOffset).toByteArray()
         val (pwnFoxHeaders, cleanHeaders) = requestInfo.headers.partition {
-            it.startsWith("X-PwnFox-")
+            it.toLowerCase().startsWith("x-pwnfox-")
         }
 
         pwnFoxHeaders.forEach() {
-            if (it.startsWith(("X-PwnFox-Color:"))) {
+            if (it.toLowerCase().startsWith(("x-pwnfox-color:"))) {
                 val (_, color) = it.split(":", limit = 2)
                 messageInfo.highlight = color.trim()
             }
@@ -45,7 +45,3 @@ class BurpExtender : IBurpExtender, IHttpListener, IExtensionStateListener {
     override fun extensionUnloaded() {
     }
 }
-
-
-
-

@@ -84,12 +84,6 @@ In Burp go to extender and add `PwnFox-Burp.jar` as a java extension.
 
 ## Build
 
-### All
-```shell
-./build.sh
-# Pwnfox-firefox.zip and PwnFox-burp.jar are available in /bin
-```
-
 ### Firefox
 
 ```shell
@@ -103,13 +97,11 @@ web-ext sign --api-key="$KEY" --api-secret="$SECRET"
 ```
 ### Burp
 
-```shell
-cd burp
-gradle build
-# the jar file is available in /burp/build/libs/PwnFox.jar
-```
+Open and compile with Intellij IDEA
 
 ## Changelog
 
+* v1.0.3
+  * Fix missing highlight with burp v2021.4.2
 * v1.0.2
   * First public release
