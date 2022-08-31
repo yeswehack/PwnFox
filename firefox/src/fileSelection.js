@@ -1,10 +1,10 @@
 
 
 
-function newFileSelection(config, storeName, selector, defaultName) {
+async function newFileSelection(config, storeName, selector, defaultName) {
     const el = document.querySelector(selector)
     const select = el.querySelector("select")
-    const files = config[storeName];
+    const files = await config.get(storeName);
 
     const newBtn = el.querySelector(".file-list-new")
     const saveBtn = el.querySelector(".file-list-save")
@@ -48,14 +48,14 @@ function newFileSelection(config, storeName, selector, defaultName) {
 
     function saveFile(filename, content) {
         files[filename] = content
-        config[storeName] = files
+        config.set(storeName, files)
     }
 
     function removeFile(filename) {
         const toRemove = Array.from(select.children).find(c => c.value === filename)
         select.removeChild(toRemove)
         delete files[filename]
-        config[storeName] = files
+        config.set(storeName, files)
         textarea.disabled = select.children.length === 0
     }
 
@@ -120,7 +120,7 @@ function newFileSelection(config, storeName, selector, defaultName) {
 
         addShadow()
     })
-    
+
     textarea.addEventListener("keyup", addShadow)
 
 

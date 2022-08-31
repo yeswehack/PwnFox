@@ -3,13 +3,13 @@ class Feature {
         this.config = config
         this.configName = configName
         this.started = false
-        this.config.addListener(configName, v => {
+        config.onChange(configName, v => {
             v ? this.start() : this.stop()
         })
     }
 
-    maybeStart() {
-        if (this.config[this.configName]) {
+    async maybeStart() {
+        if (await this.config.get(this.configName)) {
             this.start();
         } else {
             this.stop();
@@ -17,12 +17,10 @@ class Feature {
     }
 
     start() {
-        //console.log(`STARTING ${this.constructor.name}`)
         this.started = true
     }
 
     stop() {
-        //console.log(`STOPING ${this.constructor.name}`)
         this.started = false
     }
 }
@@ -30,10 +28,12 @@ class Feature {
 
 /* Burp Proxy */
 
-function proxify(config) {
-    return function (e) {
-        const host = config.burpProxyHost
-        const port = config.burpProxyPort
+function proxify(config, onlyContainers) {
+    return async function (e) {
+        if (onlyContainers && e.cookieStoreId == 'firefox-default')
+            return { type: "direct" };
+        const host = await config.get("burpProxyHost")
+        const port = await config.get("burpProxyPort")
         return {
             type: "http",
             host,
@@ -43,20 +43,44 @@ function proxify(config) {
 }
 
 
-class UseBurpProxy extends Feature {
+
+class UseBurpProxyAll extends Feature {
     constructor(config) {
-        super(config, 'useBurpProxy')
-        this.proxy = proxify(config)
+        super(config, 'useBurpProxyAll')
+        this.proxy = proxify(config, false)
     }
 
-    start() {
-        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+    async start() {
         super.start()
+        if (!await this.config.get("enabled")) return
+
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+
     }
 
     stop() {
         browser.proxy.onRequest.removeListener(this.proxy)
         super.stop()
+    }
+}
+
+
+class UseBurpProxyContainers extends Feature {
+    constructor(config) {
+        super(config, 'useBurpProxyContainer')
+        this.proxy = proxify(config, true)
+    }
+
+    async start() {
+        super.start()
+        if (!await this.config.get("enabled")) return
+
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+    }
+
+    stop() {
+        super.stop()
+        browser.proxy.onRequest.removeListener(this.proxy)
     }
 }
 
@@ -95,12 +119,14 @@ class AddContainerHeader extends Feature {
         super(config, 'addContainerHeader')
     }
 
-    start() {
+    async start() {
+        super.start()
+        if (!await this.config.get("enabled")) return
+
         browser.webRequest.onBeforeSendHeaders.addListener(colorHeaderHandler,
             { urls: ["<all_urls>"] },
             ["blocking", "requestHeaders"]
         );
-        super.start()
     }
 
     stop() {
@@ -131,17 +157,19 @@ class RemoveSecurityHeaders extends Feature {
         super(config, 'removeSecurityHeaders')
     }
 
-    start() {
+    async start() {
+        super.start()
+        if (!await this.config.get("enabled")) return
+
         browser.webRequest.onHeadersReceived.addListener(removeHeaders,
             { urls: ["<all_urls>"] },
             ["blocking", "responseHeaders"]
         );
-        super.start()
     }
 
     stop() {
-        browser.webRequest.onHeadersReceived.removeListener(removeHeaders)
         super.stop()
+        browser.webRequest.onHeadersReceived.removeListener(removeHeaders)
     }
 }
 
@@ -151,27 +179,39 @@ class InjectToolBox extends Feature {
     constructor(config) {
         super(config, "injectToolbox")
         this.script = null
+        config.onChange("activeToolbox", () => this.maybeStart())
+        config.onChange("savedToolbox", () => this.maybeStart())
     }
 
-    start() {
-        const toolboxName = this.config.activeToolbox
-        const toolbox = this.config.savedToolbox[toolboxName] || ""
-        if (!toolbox.trim()) {
-            return
+
+    async start() {
+        super.start()
+        if (!await this.config.get("enabled")) return
+
+
+
+        const toolboxName = await this.config.get("activeToolbox")
+        const toolbox = (await this.config.get("savedToolbox"))[toolboxName] || ""
+
+        if (this.script) {
+            this.script.unregister()
         }
 
-        this.script = document.createElement('script')
-        this.script.textContent = toolbox;
-        (document.head || document.documentElement).appendChild(this.script);
-        super.start()
+        this.script = await browser.contentScripts.register({
+            allFrames: true,
+            matches: ["<all_urls>"],
+            runAt: "document_start",
+            js: [{
+                code: toolbox,
+            }]
+        })
     }
 
     stop() {
-        if (this.script) {
-            this.script.parentElement.removeChild(this.script)
-            this.script = null
-        }
         super.stop()
+        if (this.script) {
+            this.script.unregister()
+        }
     }
 
 }
@@ -187,19 +227,20 @@ class LogPostMessage extends Feature {
         super(config, "logPostMessage")
     }
 
-    start() {
-        window.addEventListener("message", logMessage);
+    async start() {
         super.start()
+        if (!await this.config.get("enabled")) return
+        window.addEventListener("message", logMessage);
+
     }
 
     stop() {
-        window.removeEventListener("message", logMessage);
         super.stop()
+        window.removeEventListener("message", logMessage);
     }
 }
 
 /* Global Enable */
-
 
 class FeaturesGroup extends Feature {
     constructor(config, features) {
@@ -208,13 +249,13 @@ class FeaturesGroup extends Feature {
     }
 
     start() {
-        this.features.forEach(f => f.maybeStart())
         super.start()
+        this.features.forEach(f => f.maybeStart())
     }
 
     stop() {
-        this.features.forEach(f => f.stop())
         super.stop()
+        this.features.forEach(f => f.stop())
     }
 }
 
@@ -222,25 +263,27 @@ class FeaturesGroup extends Feature {
 class BackgroundFeatures extends FeaturesGroup {
     constructor(config) {
         const features = [
-            new UseBurpProxy(config),
+            new UseBurpProxyContainers(config),
+            new UseBurpProxyAll(config),
             new AddContainerHeader(config),
-            new RemoveSecurityHeaders(config)
+            new InjectToolBox(config),
+            new RemoveSecurityHeaders(config),
         ]
         super(config, features)
     }
 
     start() {
+        super.start()
         createIcon("#00ff00").then(([canvas, imageData]) => {
             browser.browserAction.setIcon({ imageData })
         })
-        super.start()
     }
 
     stop() {
+        super.stop()
         createIcon("#ff0000").then(([canvas, imageData]) => {
             browser.browserAction.setIcon({ imageData })
         })
-        super.stop()
     }
 }
 
@@ -248,7 +291,6 @@ class BackgroundFeatures extends FeaturesGroup {
 class ContentScriptFeatures extends FeaturesGroup {
     constructor(config) {
         const features = [
-            new InjectToolBox(config),
             new LogPostMessage(config),
         ]
         super(config, features)

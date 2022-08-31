@@ -1,7 +1,6 @@
 
 
 async function main(){
-    const config = await getConfig();
     const features = new ContentScriptFeatures(config)
     features.maybeStart()
 }

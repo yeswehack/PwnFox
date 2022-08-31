@@ -1,9 +1,9 @@
 
 /* Create a filter function and store the compiled version */
 const func_cache = {}
-function getFilterFunction(config) {
-  const funcName = config.activeMessageFunc
-  const funcSrc = config.savedMessageFunc[funcName] || "return data"
+async function getFilterFunction(config) {
+  const funcName = await config.get("activeMessageFunc")
+  const funcSrc = (await config.get("savedMessageFunc"))[funcName] || "return data"
   if (!(funcSrc in func_cache)) {
     func_cache[funcSrc] = new Function("data", "origin", "destination", funcSrc)
   }
@@ -76,13 +76,13 @@ function addRow(origin, dest, msg, time) {
 }
 
 function createMessageHandler(config) {
-  return function handleMessage(message) {
+  return async function handleMessage(message) {
     const date = new Date()
     const h = date.getHours().toString().padStart(2, "0")
     const m = date.getMinutes().toString().padStart(2, "0")
     const s = date.getSeconds().toString().padStart(2, "0")
     const time = `${h}:${m}:${s}`
-    const filterFunction = getFilterFunction(config)
+    const filterFunction = await getFilterFunction(config)
     try {
       const data = filterFunction(message.data, message.origin, message.destination)
       if (data === null) return
@@ -96,12 +96,11 @@ function createMessageHandler(config) {
 
 
 async function main() {
-  const config = await getConfig()
   const $ = sel => document.querySelector(sel)
   const $$ = sel => Array.from(document.querySelectorAll(sel))
 
   window.handleMessage = createMessageHandler(config)
-  
+
   /* Top left buttons */
   $("#btn-clear").addEventListener("click", () => {
     $("#message-list").innerHTML = ""
@@ -115,26 +114,28 @@ async function main() {
 
 
   /* toggle panel */
-  if (config.devToolDual){
+  if (await config.get("devToolDual")) {
     $("main").classList.add("dual")
   }
   $("#toggleDual").addEventListener("click", () => {
     $("main").classList.toggle("dual")
-    config.devToolDual = $("main").classList.contains("dual")
+    config.set("devToolDual", $("main").classList.contains("dual"))
   })
 
 
   /* Right panel */
   newFileSelection(config, "savedMessageFunc", "#savedMessageFunc", "filter")
-  
+
   const select = $("#savedMessageFunc select")
-  Array.from(select.children).find(c => c.selected = c.value === config.activeMessageFunc) 
+  const activeMessageFunc = await config.get("activeMessageFunc")
+
+  Array.from(select.children).find(c => c.selected = c.value === activeMessageFunc)
   select.addEventListener("change", () => {
-    config.activeMessageFunc = select.value
+    config.set("activeMessageFunc", select.value)
   })
 
   const textarea = $("#savedMessageFunc textarea")
-  textarea.value = config.savedMessageFunc[config.activeMessageFunc] || ""
+  textarea.value = (await config.get("savedMessageFunc"))[activeMessageFunc] || ""
 }
 
 window.addEventListener("DOMContentLoaded", main)

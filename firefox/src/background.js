@@ -28,7 +28,6 @@ function handleMessage(message, sender) {
 /* */
 
 async function main() {
-    const config = await getConfig();
     const features = new BackgroundFeatures(config)
 
     features.maybeStart()

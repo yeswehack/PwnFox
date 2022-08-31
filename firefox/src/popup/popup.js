@@ -17,10 +17,10 @@ async function createContainerTab(color) {
     return browser.tabs.create({ cookieStoreId })
 }
 
-function bindCheckboxToConfig(selector, config, configName){
+async function bindCheckboxToConfig(selector, config, configName) {
     const checkbox = document.querySelector(selector)
-    checkbox.checked = config[configName]
-    checkbox.addEventListener("change", () => config[configName] = checkbox.checked)
+    checkbox.checked = await config.get(configName)
+    checkbox.addEventListener("change", () => config.set(configName, checkbox.checked))
 }
 
 
@@ -63,12 +63,12 @@ async function togglePwnfox(enabled) {
 }
 
 async function main() {
-    const config = await getConfig()
 
     createContainerTabButtons()
-    
+
     bindCheckboxToConfig("#option-enabled", config, "enabled")
-    bindCheckboxToConfig("#option-useBurpProxy", config, "useBurpProxy")
+    bindCheckboxToConfig("#option-useBurpProxyAll", config, "useBurpProxyAll")
+    bindCheckboxToConfig("#option-useBurpProxyContainer", config, "useBurpProxyContainer")
     bindCheckboxToConfig("#option-addContainerHeader", config, "addContainerHeader")
     bindCheckboxToConfig("#option-removeSecurityHeaders", config, "removeSecurityHeaders")
     bindCheckboxToConfig("#option-injectToolbox", config, "injectToolbox")
@@ -79,18 +79,20 @@ async function main() {
     })
 
     const select = document.getElementById("select-toolbox")
-    const filenames = Object.keys(config.savedToolbox)
+    const filenames = Object.keys(await config.get("savedToolbox"))
+    const activeToolbox = await config.get("activeToolbox");
     for (const filename of filenames) {
         const option = document.createElement("option")
         option.value = filename
-        option.selected = filename === config.activeToolbox
+        option.selected = filename === activeToolbox
         option.innerText = filename
         select.appendChild(option)
     }
     select.addEventListener("change", () => {
-        config.activeToolbox = select.value
+        config.set("activeToolbox", select.value)
     })
-    config.addListener('enabled', togglePwnfox, true)
+    config.onChange('enabled', togglePwnfox, true)
+    togglePwnfox(await config.get("enabled"))
 }
 
 window.addEventListener("load", main)
