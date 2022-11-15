@@ -82,7 +82,7 @@ Headers stripped:
 
 
 You can find the latest build here:
-* [https://github.com/B-i-t-K/PwnFox/releases](https://github.com/B-i-t-K/PwnFox/releases)
+* [https://github.com/yeswehack/PwnFox/releases](https://github.com/yeswehack/PwnFox/releases)
 
 ### Firefox
  - visit `about:addons` and choose install from file, then select `PwnFox-$version.xpi`
