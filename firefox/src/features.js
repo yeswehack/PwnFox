@@ -110,6 +110,9 @@ async function colorHeaderHandler(e) {
         const name = "X-PwnFox-Color"
         const value = colorMap[identity.color]
         e.requestHeaders.push({ name, value })
+    }else{
+        //If it isn't a pwnfox container, add the container's name as a header instead.
+        e.requestHeaders.push({"name": "X-FF-Container", "value": identity.name})
     }
     return { requestHeaders: e.requestHeaders }
 }
