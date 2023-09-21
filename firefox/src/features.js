@@ -54,7 +54,7 @@ class UseBurpProxyAll extends Feature {
         super.start()
         if (!await this.config.get("enabled")) return
 
-        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] },["requestHeaders"])
 
     }
 
@@ -75,7 +75,7 @@ class UseBurpProxyContainers extends Feature {
         super.start()
         if (!await this.config.get("enabled")) return
 
-        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] },["requestHeaders"])
     }
 
     stop() {
