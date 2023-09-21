@@ -30,7 +30,7 @@ class Feature {
 
 function proxify(config, onlyContainers) {
     return async function (e) {
-        if (onlyContainers && e.cookieStoreId == 'firefox-default')
+        if ((onlyContainers && e.cookieStoreId == 'firefox-default') || e.requestHeaders.some(header => header.name === "X-Do-Not-Proxy" && header.value === "on"))
             return { type: "direct" };
         const host = await config.get("burpProxyHost")
         const port = await config.get("burpProxyPort")
@@ -54,7 +54,7 @@ class UseBurpProxyAll extends Feature {
         super.start()
         if (!await this.config.get("enabled")) return
 
-        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] },["requestHeaders"])
 
     }
 
@@ -75,7 +75,7 @@ class UseBurpProxyContainers extends Feature {
         super.start()
         if (!await this.config.get("enabled")) return
 
-        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] })
+        browser.proxy.onRequest.addListener(this.proxy, { urls: ["<all_urls>"] },["requestHeaders"])
     }
 
     stop() {
