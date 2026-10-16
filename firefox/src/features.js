@@ -94,6 +94,7 @@ async function colorHeaderHandler(e) {
     const colorMap = {
         blue: "blue",
         turquoise: "cyan",
+        cyan: "cyan",
         green: "green",
         yellow: "yellow",
         orange: "orange",
