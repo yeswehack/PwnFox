@@ -70,6 +70,7 @@ async function main() {
     bindCheckboxToConfig("#option-useBurpProxyAll", config, "useBurpProxyAll")
     bindCheckboxToConfig("#option-useBurpProxyContainer", config, "useBurpProxyContainer")
     bindCheckboxToConfig("#option-addContainerHeader", config, "addContainerHeader")
+    bindCheckboxToConfig("#option-colorAllContainers", config, "colorAllContainers")
     bindCheckboxToConfig("#option-removeSecurityHeaders", config, "removeSecurityHeaders")
     bindCheckboxToConfig("#option-injectToolbox", config, "injectToolbox")
 

@@ -4,6 +4,7 @@ const defaultConfig = {
     enabled: false,
     useBurpProxy: false,
     addContainerHeader: true,
+    colorAllContainers: false,
     injectToolbox: false,
     logPostMessage: true,
     removeSecurityHeaders: false,
