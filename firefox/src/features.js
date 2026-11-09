@@ -94,21 +94,27 @@ async function colorHeaderHandler(e) {
     const colorMap = {
         blue: "blue",
         turquoise: "cyan",
+        cyan: "cyan",
         green: "green",
         yellow: "yellow",
         orange: "orange",
         red: "red",
         pink: "pink",
         purple: "magenta",
+        violet: "magenta",
     }
     const { cookieStoreId } = await browser.tabs.get(e.tabId)
-    if (cookieStoreId === "firefox-default") {
+    if (cookieStoreId === "firefox-default" || cookieStoreId === "firefox-private") {
         return {}
     }
     const identity = await browser.contextualIdentities.get(cookieStoreId)
-    if (identity.name.startsWith("PwnFox-")) {
+    if (!identity.name.startsWith("PwnFox-") && !await config.get("colorAllContainers")) {
+        return { requestHeaders: e.requestHeaders }
+    }
+    // Only mapped colors get a header; gray (formerly toolbar) is excluded.
+    const value = colorMap[identity.color]
+    if (value) {
         const name = "X-PwnFox-Color"
-        const value = colorMap[identity.color]
         e.requestHeaders.push({ name, value })
     }
     return { requestHeaders: e.requestHeaders }

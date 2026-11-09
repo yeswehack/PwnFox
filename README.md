@@ -30,7 +30,9 @@ Connect to Burp with a simple click, this will probably remove the need for othe
 ###  Containers Profiles
 
 PwnFox give you fast access to the Firefox containers. This allow you to have multiple identities in the same browser. 
-When PwnFox and the `Add container header` option are enabled, PwnFox will automatically add a `X-PwnFox-Color` header to hightlight the query in Burp.
+When PwnFox and the `Add container header` option are enabled, PwnFox will automatically add a `X-PwnFox-Color` header to highlight requests from containers whose names start with `PwnFox-` in Burp. Enable `Color all containers` to include any non-gray Firefox container, regardless of its name. This option is off by default and requires `Add container header` to be enabled. Gray containers (`gray`, formerly `toolbar`) and tabs outside containers do not receive this header.
+
+Firefox's `turquoise` and `cyan` colors map to Burp's `cyan`; `purple` and `violet` both map to Burp's `magenta`. The other supported non-gray colors keep their names. Burp uses its own highlight palette, so the shades may differ from Firefox.
 
 PwnFoxBurp will automatically highlight and strip the header, but you can also specify your own behavior with addons like logger++.
 
